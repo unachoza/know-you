@@ -4,11 +4,13 @@
   "private": true,
   "dependencies": {
     "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.3",
     "add": "^2.0.6",
     "firebase": "5.11.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-firestore": "^1.0.1",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
     "typescript": "^3.4.5",
     "yarn": "^1.15.2"
@@ -33,5 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "history": "^4.9.0"
   }
 }

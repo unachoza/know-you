@@ -12,8 +12,12 @@ const config = {
    messagingSenderId: "846232402101",
    appId: "1:846232402101:web:4816832bcc9ea79f"
 }
+interface Firebase {
+    auth?: any;
 
-class Firebase {
+}
+
+class Firebase  {
     constructor(){
         app.initializeApp(config)
 

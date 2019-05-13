@@ -1,33 +1,45 @@
-import ReactDOM from 'react-dom'
-import App from './components/app'
-import '@firebase/firestore';
-import { FirestoreProvider } from 'react-firestore';
- 
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const firebase: any =require('firebase')
- 
-firebase.initializeApp = {
-    apiKey: "AIzaSyA43DdWAqjjTk4S5Lps7tQtOlW8STbN-L4",
-    authDomain: "knowyou-e31a6.firebaseapp.com",
-    databaseURL: "https://knowyou-e31a6.firebaseio.com",
-    projectId: "knowyou-e31a6",
-    storageBucket: "knowyou-e31a6.appspot.com",
-    messagingSenderId: "846232402101",
-    appId: "1:846232402101:web:4816832bcc9ea79f"
-};
- 
-var db= firebase.firestore()
+import './index.css';
+import * as serviceWorker from './serviceWorker';
 
-db.collection("personal").get().then((QuerySnapshot: any) => {
-  QuerySnapshot.forEach((doc:any) => {
-      console.log(`${doc.id} => ${doc.data()}`)
-  })
-})
+import App from './components/App'
+import Firebase, { FirebaseContext } from './components/Firebase'
 
- 
 ReactDOM.render(
-  <FirestoreProvider firebase={firebase}>
+  <FirebaseContext.Provider value={ new Firebase()} >
     <App />
-  </FirestoreProvider>,
-  document.getElementById('root'),
-);
+  </FirebaseContext.Provider>,
+  document.getElementById('root'))
+
+serviceWorker.unregister();
+ 
+
+// const Firebase: any =require('Firebase')
+ 
+// Firebase.initializeApp = {
+//     apiKey: "AIzaSyA43DdWAqjjTk4S5Lps7tQtOlW8STbN-L4",
+//     authDomain: "knowyou-e31a6.Firebaseapp.com",
+//     databaseURL: "https://knowyou-e31a6.Firebaseio.com",
+//     projectId: "knowyou-e31a6",
+//     storageBucket: "knowyou-e31a6.appspot.com",
+//     messagingSenderId: "846232402101",
+//     appId: "1:846232402101:web:4816832bcc9ea79f"
+// };
+ 
+// var db= Firebase.firestore()
+
+// db.collection("personal").get().then((QuerySnapshot: any) => {
+//   QuerySnapshot.forEach((doc:any) => {
+//       console.log(`${doc.id} => ${doc.data()}`)
+//   })
+// })
+
+ 
+// ReactDOM.render(
+//   <FirestoreProvider Firebase={Firebase}>
+//     <App />
+//   </FirestoreProvider>,
+//   document.getElementById('root'),
+// );
