@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-const PasswordChange = () => {
-    <div>
-        <h1>PasswordChange</h1>
-    </div>
+class PasswordChange extends Component{
+    render(){
+        return(
+            <div>
+                <h1>PasswordChange</h1>
+            </div>
+        )
+    }
 }
 
-export default PasswordChange
+export default PasswordChange 
