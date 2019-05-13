@@ -1,0 +1,36 @@
+import app from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
+import { string } from 'prop-types';
+
+const config = {
+   apiKey: "AIzaSyA43DdWAqjjTk4S5Lps7tQtOlW8STbN-L4",
+   authDomain: "knowyou-e31a6.firebaseapp.com",
+   databaseURL: "https://knowyou-e31a6.firebaseio.com",
+   projectId: "knowyou-e31a6",
+   storageBucket: "knowyou-e31a6.appspot.com",
+   messagingSenderId: "846232402101",
+   appId: "1:846232402101:web:4816832bcc9ea79f"
+}
+
+class Firebase {
+    constructor(){
+        app.initializeApp(config)
+
+        this.auth = app.auth()
+    }
+    doCreateUserWithEmailAndPassword = (email:string, password:string) => 
+        this.auth.doCreateUserWithEmailAndPassword(email, password)
+
+    doSignInWithEmailAndPassword = (email: string, password: string) =>
+        this.auth.signInWithEmailAndPassword(email, password)
+
+    doSignOut = () => this.auth.signOut()
+
+    doPasswordReset = (email:string) => this.auth.sendPasswordResetEmail(email)
+
+    doPasswordUpdate = (password:string) => 
+        this.auth.currentUser.updatePassword(password)
+}
+
+export default Firebase
