@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {compose } from 'recompose'
 import {SignUpLink} from './SignUp'
+import {PasswordForgetLink} from './PasswordForget'
 import {withFirebase} from './Firebase'
 import { Routes } from '../constants/Routes'
 import history from '../history'
@@ -14,6 +15,7 @@ class SignIn extends Component{
             <div>
                 <h1>SignIn</h1>
                 <SignUpPage {...this.state} />
+                <PasswordForgetLink /> 
                 <SignUpLink/>
             </div>
         )
