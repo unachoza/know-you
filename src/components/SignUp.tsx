@@ -2,7 +2,21 @@ import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {withFirebase} from './Firebase/context'
 import { Routes } from '../constants/Routes';
+import { compose} from 'recompose'
 import history from '../history'
+
+class SignUpPage extends Component<{},State>{
+    render(){
+        return (
+        <div>
+            <h1>Sign Up</h1>
+             <SignUpForm {...this.state} /> 
+            
+        </div>
+        )
+    }
+    
+ }
 
 export interface Props {
     username?: string,
@@ -42,14 +56,23 @@ class SignUpFormBase extends Component<State, Props>{
         this.props.firebase
         .doCreateUserWithEmailAndPassword(email, passwordOne)
         .then((authUser:any) => {
-            this.setState({...INITIAL_STATE})
-            this.props.history.push(Routes.HOME)
-        })
-        .catch((error:any) => {
-            this.setState({error})
-        })
+            return this.props.firebase.user(authUser.user.uid).set(
+                {
+                    username, 
+                    email
+                }, 
+                {merge: true},
+            )
+            })
+            .then(() => {
+                this.setState({...INITIAL_STATE})
+                this.props.history.push(Routes.HOME)
+            })
+            .catch((error:any) => {
+                this.setState({error})
+            })
 
-        event.preventDefault()
+            event.preventDefault()
     }
 
     onChange = (event:any) => {
@@ -114,19 +137,8 @@ const SignUpLink = () => {
 
 export {SignUpForm, SignUpLink} 
 
-const SignUpForm = withRouter(withFirebase(SignUpFormBase))
+const SignUpForm = compose (withRouter, withFirebase)(SignUpFormBase)
 
-class SignUpPage extends Component<{},State>{
-    render(){
-        return (
-        <div>
-            <h1>Sign Up</h1>
-             <SignUpForm {...this.state} /> 
-            
-        </div>
-        )
-    }
-    
- }
+
  export default SignUpPage
  
