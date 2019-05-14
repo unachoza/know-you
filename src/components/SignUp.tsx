@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import Firebase, {FirebaseContext} from './Firebase/context'
+import {Link, withRouter} from 'react-router-dom'
+import {withFirebase} from './Firebase/context'
 import { Routes } from '../constants/Routes';
+import history from '../history'
 
 export interface Props {
     username?: string,
@@ -18,6 +19,7 @@ export interface State {
     passwordTwo: string,
     error: any,
     firebase?: any, 
+    history?: any
     // state:any
 }
 const INITIAL_STATE = {
@@ -29,17 +31,19 @@ const INITIAL_STATE = {
     firebase: {}
   };
 
-class SignUpForm extends Component<State, Props>{
+class SignUpFormBase extends Component<State, Props>{
     constructor(props:any){
         super(props)
         this.state = {...INITIAL_STATE}
     }
     onSubmit = (event:any) => {
         const {username, email, passwordOne} = this.state
+
         this.props.firebase
         .doCreateUserWithEmailAndPassword(email, passwordOne)
         .then((authUser:any) => {
             this.setState({...INITIAL_STATE})
+            this.props.history.push(Routes.HOME)
         })
         .catch((error:any) => {
             this.setState({error})
@@ -69,28 +73,28 @@ class SignUpForm extends Component<State, Props>{
                 onChange={this.onChange}
                 type="text"
                 placeholder="Full Name"
-                />
+                /> <br/>
                 <input
                 name="email"
                 value={email}
                 onChange={this.onChange}
                 type="text"
                 placeholder="Email Address"
-                />
+                /><br/>
                 <input
                 name="passwordOne"
                 value={passwordOne}
                 onChange={this.onChange}
                 type="password"
                 placeholder="Password"
-                />
+                /><br/>
                 <input
                 name="passwordTwo"
                 value={passwordTwo}
                 onChange={this.onChange}
                 type="password"
                 placeholder="Confirm Password"
-                />
+                /><br/>
                 <button disabled={isInvalid} type="submit">Sign Up</button>
 
                 {error && <p>{error.message}</p>}
@@ -110,17 +114,19 @@ const SignUpLink = () => {
 
 export {SignUpForm, SignUpLink} 
 
+const SignUpForm = withRouter(withFirebase(SignUpFormBase))
 
-
-export class SignUpPage extends Component<{},State>{
+class SignUpPage extends Component<{},State>{
     render(){
         return (
         <div>
             <h1>Sign Up</h1>
-            <SignUpForm {...this.state}/> 
+             <SignUpForm {...this.state} /> 
+            
         </div>
         )
     }
     
  }
+ export default SignUpPage
  
