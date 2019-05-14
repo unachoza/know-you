@@ -17,7 +17,8 @@ export interface State {
     passwordOne: string,
     passwordTwo: string,
     error: any,
-    firebase?: any
+    firebase?: any, 
+    // state:any
 }
 const INITIAL_STATE = {
     username : '',
@@ -109,14 +110,17 @@ const SignUpLink = () => {
 
 export {SignUpForm, SignUpLink} 
 
-const SignUpPage = () => {
-    return (
-     <div>
-         <h1>Sign Up</h1>
-         <FirebaseContext.Consumer>
-         {(firebase:any) => <SignUpForm {...this.state} firebase={firebase} /> }
-         </FirebaseContext.Consumer>
-     </div>
-    )
+
+
+export class SignUpPage extends Component<{},State>{
+    render(){
+        return (
+        <div>
+            <h1>Sign Up</h1>
+            <SignUpForm {...this.state}/> 
+        </div>
+        )
+    }
+    
  }
  
