@@ -20,7 +20,7 @@ class SignIn extends Component{
     }
 }
 
-export default SignIn 
+
 
 interface State {
     email: string,
@@ -65,4 +65,42 @@ class SignInFormBase extends Component<State, Props> {
         })
         event.preventDefault()
     }
+
+    onChange =(event:any) => {
+        this.setState({ [event.target.name]: event.tartget.value})
+    }
+    render(){
+        const {email, password, error} = this.state
+        const isInvalid = password === "" || email === ""
+
+        return(
+            <form onSubmit={this.onSubmit}>
+            <input
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Email Address"
+            />
+            <input
+            name="password"
+            value={password}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+            />
+            <button disable={isInvalid} type="submit">
+                Sign In
+            </button>
+
+            {error && <p>{error.message}</p>}
+            </form>
+        )
+    }
 }
+
+const SignInForm = compose(withRouter, withFirebase)(SignInFormBase)
+
+export default SignIn 
+
+export {SignInForm}

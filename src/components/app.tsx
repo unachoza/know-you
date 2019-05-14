@@ -10,35 +10,34 @@ import HomePage from './Home';
 import AccountPage from './Account';
 import AdminPage from './Admin';
 import { Routes } from "../constants/Routes";
+import {withAuthentication} from './Sessions'
 
-class App extends Component {
-    render(){
-        return (
-            <div  >
 
-           
-            <Router history={history}  >
-                <Navigation/>
-                <hr />
-                <div style= {{textAlign: "center"}}>
-                <Route exact path={Routes.LANDING} component={LandingPage} />
-                <Route path={Routes.SIGN_UP} component={SignUpPage} />
-                <Route path={Routes.SIGN_IN} component={SignInPage} />
-                <Route path={Routes.PASSWORD_FORGET} component={PasswordForgetPage} />
-                <Route path={Routes.HOME} component={HomePage} />
-                <Route path={Routes.ACCOUNT} component={AccountPage} />
-                <Route path={Routes.ADMIN} component={AdminPage} />
-                </div>
-            </Router>
-            </div>
-        )
-    }
-    
-          
-            // <div>
-            //     <h1>Application</h1>
-            // </div>
-   
+interface State {
+    authUser?: any,
+    firebase?:any, 
+    listener?: any
+}
+interface Props {
+    firebase?:any,
+    listener?: any
 }
 
-export default App
+const App = () => {
+        <Router history={history}  >
+            <Navigation authUser={this.state.authUser}/>
+            <hr />
+            <div style= {{textAlign: "center"}}>
+            <Route exact path={Routes.LANDING} component={LandingPage} />
+            <Route path={Routes.SIGN_UP} component={SignUpPage} />
+            <Route path={Routes.SIGN_IN} component={SignInPage} />
+            <Route path={Routes.PASSWORD_FORGET} component={PasswordForgetPage} />
+            <Route path={Routes.HOME} component={HomePage} />
+            <Route path={Routes.ACCOUNT} component={AccountPage} />
+            <Route path={Routes.ADMIN} component={AdminPage} />
+            </div>
+        </Router>
+ 
+}
+
+export default withAuthentication(App)
