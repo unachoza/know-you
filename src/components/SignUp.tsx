@@ -1,29 +1,23 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import Firebase, {FirebaseContext} from './Firebase/context'
 import { Routes } from '../constants/Routes';
 
-const SignUpPage = () => {
-   return (
-    <div>
-        <h1>Sign Up</h1>
-        <SignUpForm/>
-    </div>
-
-   )
-}
 export interface Props {
     username?: string,
     email?: string,
     passwordOne?: string,
     passwordTwo?: string,
-    error?: {}
+    error?: any,
+    firebase?: any
 }
 export interface State {
     username: string,
     email: string,
     passwordOne: string,
     passwordTwo: string,
-    error: {}
+    error: any,
+    firebase?: any
 }
 const INITIAL_STATE = {
     username : '',
@@ -31,6 +25,7 @@ const INITIAL_STATE = {
     passwordOne: '',
     passwordTwo: '',
     error: null,
+    firebase: {}
   };
 
 class SignUpForm extends Component<State, Props>{
@@ -39,7 +34,17 @@ class SignUpForm extends Component<State, Props>{
         this.state = {...INITIAL_STATE}
     }
     onSubmit = (event:any) => {
+        const {username, email, passwordOne} = this.state
+        this.props.firebase
+        .doCreateUserWithEmailAndPassword(email, passwordOne)
+        .then((authUser:any) => {
+            this.setState({...INITIAL_STATE})
+        })
+        .catch((error:any) => {
+            this.setState({error})
+        })
 
+        event.preventDefault()
     }
 
     onChange = (event:any) => {
@@ -48,6 +53,13 @@ class SignUpForm extends Component<State, Props>{
 
     render(){
         const  {username, email, passwordOne, passwordTwo, error } = this.state
+
+        const isInvalid =
+        passwordOne !== passwordTwo ||
+        passwordOne === '' ||
+        email === '' ||
+        username === '';
+
         return(
             <form onSubmit={this.onSubmit}>
                 <input
@@ -78,7 +90,7 @@ class SignUpForm extends Component<State, Props>{
                 type="password"
                 placeholder="Confirm Password"
                 />
-                <button type="submit">Sign Up</button>
+                <button disabled={isInvalid} type="submit">Sign Up</button>
 
                 {error && <p>{error.message}</p>}
 
@@ -93,8 +105,18 @@ const SignUpLink = () => {
         Don't have an account? <Link to={Routes.SIGN_UP}>Sign Up</Link>
     </p>
     )
-    
 }
 
-export default SignUpPage
 export {SignUpForm, SignUpLink} 
+
+const SignUpPage = () => {
+    return (
+     <div>
+         <h1>Sign Up</h1>
+         <FirebaseContext.Consumer>
+         {(firebase:any) => <SignUpForm {...this.state} firebase={firebase} /> }
+         </FirebaseContext.Consumer>
+     </div>
+    )
+ }
+ 
