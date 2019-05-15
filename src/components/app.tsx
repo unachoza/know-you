@@ -18,7 +18,8 @@ export interface Props {
     email?: string,
     password?: string
     error?: any,
-    firebase?: any
+    firebase?: any,
+    authUser?: any
 }
 export interface State {
     username: string,
@@ -27,6 +28,7 @@ export interface State {
     error: any,
     firebase?: any, 
     history?: any
+    authUser?: any
     // state:any
 }
 
@@ -41,10 +43,10 @@ export interface State {
 //     authUser?: any
 // }
 
-const App = () => {
+const App = ()  => {
     return (
         <Router history={history} >
-            <Navigation authUser={this.state.authUser}/>
+            <Navigation /> 
             <hr />
             <div style= {{textAlign: "center"}}>
                 <Route exact path={Routes.LANDING} component={LandingPage} />

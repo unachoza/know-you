@@ -5,7 +5,7 @@ import {withAuthorization, AuthUserContext} from './Sessions'
 
 
 const AccountPage = () => {
-    <AuthUserContext.Consumer>
+    return <AuthUserContext.Consumer>
         {authUser => (
             <div>
                 <h1>Account Page</h1>

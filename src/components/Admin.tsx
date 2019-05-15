@@ -70,16 +70,16 @@ const UserList = ({users: {}}) => {
     return (
         <ul>
             {users.map((user:any) => {
-                <li key={user.uid}>
-                <span>
-                    <strong>ID:</strong> {user.uid}
-                </span>
-                <span>
-                    <strong>E-mail:</strong> {user.email}
-                </span>
-                <span>
-                    <strong>Username:</strong> {user.username}
-                </span>
+                return <li key={user.uid}>
+                    <span>
+                        <strong>ID:</strong> {user.uid}
+                    </span>
+                    <span>
+                        <strong>E-mail:</strong> {user.email}
+                    </span>
+                    <span>
+                        <strong>Username:</strong> {user.username}
+                    </span>
                 </li>
             })}
         </ul>
