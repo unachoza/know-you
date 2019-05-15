@@ -1,5 +1,6 @@
 import app from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/database'
 import 'firebase/firestore'
 import { string } from 'prop-types';
 
@@ -14,6 +15,7 @@ const config = {
 }
 interface Firebase {
     auth?: any;
+    db: any;
 
 }
 
@@ -22,6 +24,7 @@ class Firebase  {
         app.initializeApp(config)
 
         this.auth = app.auth()
+        this.db = app.database()
     }
     doCreateUserWithEmailAndPassword = (email:string, password:string) => 
         this.auth.doCreateUserWithEmailAndPassword(email, password)
@@ -38,7 +41,10 @@ class Firebase  {
             await this.auth.currentUser.updatePassword(password)
         }
         throw Error('No auth.currentUser!')
-    }   
+    }
+    
+    user = uid => this.db.ref(`user/${uid}`)
+    users = () => this.db.ref('users')
 }
 
 export default Firebase
