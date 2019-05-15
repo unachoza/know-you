@@ -12,21 +12,30 @@ const PasswordForgetPage = () => {
         </div>
     )
 }
-interface Props{
-    firebase: any
+export interface Props {
+    username?: string,
+    email?: string,
+    password?: string
+    error?: any,
+    firebase?: any
 }
-interface State {
-    email: string
-    firebase?: any,
-    error: any
+export interface State {
+    username: string,
+    email: string,
+    password: string
+    error: any,
+    firebase?: any, 
+    history?: any
+    // state:any
 }
 
 const INITIAL_STATE = {
     email: "",
-    error: null
+    error: null,
+    firebase: {}
 }
 
-class PasswordForgetFormBase extends Component <{},State> {
+class PasswordForgetFormBase extends Component <State, Props> {
     constructor (props:any){
         super(props)
 

@@ -1,25 +1,34 @@
 import React, {Component} from 'react'
 import {withFirebase} from './Firebase'
 
-interface State {
-    passwordOne: string, 
-    passwordTwo: string,
-    error?: any, 
-   
+export interface Props {
+    username?: string,
+    email?: string,
+    passwordOne?: string,
+    passwordTwo?: string,
+    error?: any,
+    firebase?: any
 }
-interface Props {
-    firebase: {
-        users: any
-    },
+export interface State {
+    username: string,
+    email: string,
+    passwordOne: string,
+    passwordTwo: string,
+    error: any,
+    firebase?: any, 
+    history?: any
+    // state:any
 }
 
 const INITIAL_STATE ={
     passwordOne: "",
     passwordTwo: "",
-    error: "null "
+    error: null, 
+    firebase: {}
+
 }
 
-class PasswordChangeFrom extends Component<{}, State, Props> {
+class PasswordChangeFrom extends Component< State, Props> {
     constructor(props: any){
         super(props)
 

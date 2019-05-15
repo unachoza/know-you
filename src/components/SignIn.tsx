@@ -24,22 +24,21 @@ class SignIn extends Component{
 
 
 
-interface State {
-    email: string,
-    password: string, 
-    error?: {
-        message: string
-    },
-    firebase?: any,
-    history:any
+export interface Props {
+    username?: string,
+    email?: string,
+    password?: string
+    error?: any,
+    firebase?: any
 }
-interface Props{
+export interface State {
+    username: string,
     email: string,
-    password: string, 
-    error?: {
-        message?: any
-    },
-    firebase?: any,
+    password: string
+    error: any,
+    firebase?: any, 
+    history?: any
+    // state:any
 }
 
 const INITIAL_STATE ={
@@ -51,7 +50,6 @@ const INITIAL_STATE ={
 class SignInFormBase extends Component<State, Props> {
     constructor(props:any){
         super(props)
-
         this.state = {...INITIAL_STATE}
     }
     onSubmit = (event:any) => {
@@ -89,10 +87,10 @@ class SignInFormBase extends Component<State, Props> {
             name="password"
             value={password}
             onChange={this.onChange}
-            type="password"
+            type="password" 
             placeholder="Password"
             />
-            <button disable={isInvalid} type="submit">
+             <button type="submit"> {/*disable={isInvalid} */}
                 Sign In
             </button>
 

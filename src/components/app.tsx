@@ -13,30 +13,50 @@ import { Routes } from "../constants/Routes";
 import withAuthentication from './Sessions/withAuthentication'
 
 
-interface State {
-    authUser?: any,
-    firebase?:any, 
-    listener?: any
+export interface Props {
+    username?: string,
+    email?: string,
+    password?: string
+    error?: any,
+    firebase?: any
 }
-interface Props {
-    firebase?:any,
-    listener?: any
+export interface State {
+    username: string,
+    email: string,
+    password: string
+    error: any,
+    firebase?: any, 
+    history?: any
+    // state:any
 }
 
+// interface State {
+//     authUser?: any,
+//     firebase?:any, 
+//     listener?: any
+// }
+// interface Props {
+//     firebase?:any,
+//     listener?: any,
+//     authUser?: any
+// }
+
 const App = () => {
+    return (
         <Router history={history}  >
-            <Navigation match={this.props.match} authUser={this.state.authUser}/>
+            <Navigation authUser={this.state.authUser}/>
             <hr />
             <div style= {{textAlign: "center"}}>
-            <Route exact path={Routes.LANDING} component={LandingPage} />
-            <Route path={Routes.SIGN_UP} component={SignUpPage} />
-            <Route path={Routes.SIGN_IN} component={SignInPage} />
-            <Route path={Routes.PASSWORD_FORGET} component={PasswordForgetPage} />
-            <Route path={Routes.HOME} component={HomePage} />
-            <Route path={Routes.ACCOUNT} component={AccountPage} />
-            <Route path={Routes.ADMIN} component={AdminPage} />
+                <Route exact path={Routes.LANDING} component={LandingPage} />
+                <Route path={Routes.SIGN_UP} component={SignUpPage} />
+                <Route path={Routes.SIGN_IN} component={SignInPage} />
+                <Route path={Routes.PASSWORD_FORGET} component={PasswordForgetPage} />
+                <Route path={Routes.HOME} component={HomePage} />
+                <Route path={Routes.ACCOUNT} component={AccountPage} />
+                <Route path={Routes.ADMIN} component={AdminPage} />
             </div>
         </Router>
+        )
  
 }
 
