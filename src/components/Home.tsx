@@ -1,13 +1,12 @@
 import React, {Component} from 'react'
+import {withAuthoriztion} from './Sessions'
 
-class Home extends Component{
-    render(){
-        return(
-            <div>
-                <h1>Home</h1>
-            </div>
-        )
-    }
+const Home = () => {
+    <div>
+        <h1>Home Page</h1>
+        <p>The Home Page is accesible to every signed in user</p>
+    </div>
 }
+const condition = authUser => !!authUser
 
-export default Home 
+export default withAuthoriztion(condition)(Home)

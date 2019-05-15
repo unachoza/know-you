@@ -1,13 +1,16 @@
 import React, {Component} from 'react'
+import * as Roles from "../constants/Roles"
+import {withAuthorization} from './Sessions'
 
-class Admin extends Component{
-    render(){
-        return(
-            <div>
-                <h1>Admin</h1>
-            </div>
-        )
-    }
+const AdminPage = () => {
+    <div>
+        <h1>Admin</h1>
+        <p>Restricted Area! Only users with the admin roles are authorized</p>
+    </div>
 }
 
-export default Admin 
+const condition = authUser => authUser && !!authUser.roles[Roles.ADMIN]
+
+export default withAuthorization(condition)(AdminPage)
+
+
