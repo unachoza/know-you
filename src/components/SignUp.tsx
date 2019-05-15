@@ -56,13 +56,13 @@ class SignUpFormBase extends Component<State, Props>{
         this.props.firebase
         .doCreateUserWithEmailAndPassword(email, passwordOne)
         .then((authUser:any) => {
-            return this.props.firebase.user(authUser.user.uid).set(
-                {
+            //Creat a user in your Firebase realitime database
+            return this.props.firebase
+            .user(authUser.user.uid)
+            .set({
                     username, 
                     email
-                }, 
-                {merge: true},
-            )
+                })
             })
             .then(() => {
                 this.setState({...INITIAL_STATE})

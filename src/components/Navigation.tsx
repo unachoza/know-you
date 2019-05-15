@@ -44,7 +44,13 @@ const NavigationNonAuth = () => {
             <Link to={Routes.LANDING}>Landing</Link>
         </li>
         <li>
-            <Link to={Routes.SIGN_IN}> Sign in></Link>
+            <Link to={Routes.HOME}>Home</Link>
+        </li>
+        <li>
+            <Link to={Routes.SIGN_IN}>Sign in</Link>
+        </li>
+        <li>
+            <Link to={Routes.ADMIN}>Admin</Link>
         </li>
     </ul>
 }
