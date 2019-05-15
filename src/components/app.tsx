@@ -10,7 +10,7 @@ import HomePage from './Home';
 import AccountPage from './Account';
 import AdminPage from './Admin';
 import { Routes } from "../constants/Routes";
-import {withAuthentication} from './Sessions'
+import withAuthentication from './Sessions/withAuthentication'
 
 
 interface State {
