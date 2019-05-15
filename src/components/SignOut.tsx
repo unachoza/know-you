@@ -1,12 +1,11 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {withFirebase} from "./Firebase"
 
 interface firebase {
-    firebase: any
+    firebase:any
 }
 
-
-const SignOutButton = ({firebase}) => {
+const SignOutButton = ({firebase}: firebase) => {
     return (
         <button type="button" onClick={firebase.doSignOut}>
         SignOut

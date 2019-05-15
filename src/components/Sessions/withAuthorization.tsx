@@ -6,11 +6,10 @@ import { Routes } from "../../constants/Routes"
 import AuthUserContext from './context'
 
 
-
-const withAuthorization = (condition:any) => (Component:any) => {
-    class withAuthorization extends Component{
+const withAuthorization:any = (condition:any) => (Component:any) => {
+    class WithAuthorization extends Component<{} >{
         componentDidMount(){
-            this.listener =this.props.firebase.auth.onAuthStateChange(
+            this.listener =this.props.firebase.auth.onAuthStateChanged(
                 (authUser:any) => {
                     if(!condition(authUser)) {
                         this.props.history.push(Routes.SIGN_IN)
@@ -33,7 +32,10 @@ const withAuthorization = (condition:any) => (Component:any) => {
            
         }
     }
-    return compose(withRouter, withFirebase)(withAuthorization)
+    return compose(
+        withRouter,
+        withFirebase,
+      )(WithAuthorization as any)
 }
 
 export default withAuthorization

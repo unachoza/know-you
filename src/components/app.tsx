@@ -43,7 +43,7 @@ export interface State {
 
 const App = () => {
     return (
-        <Router history={history}  >
+        <Router history={history} >
             <Navigation authUser={this.state.authUser}/>
             <hr />
             <div style= {{textAlign: "center"}}>
