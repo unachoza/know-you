@@ -31,6 +31,7 @@ interface State {
         message: string
     },
     firebase?: any,
+    history:any
 }
 interface Props{
     email: string,

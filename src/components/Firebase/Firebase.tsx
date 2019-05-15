@@ -15,7 +15,9 @@ const config = {
 }
 interface Firebase {
     auth?: any;
-    db: any;
+    db: {
+        ref: any
+    };
 
 }
 
@@ -43,7 +45,7 @@ class Firebase  {
         throw Error('No auth.currentUser!')
     }
     
-    user = uid => this.db.ref(`user/${uid}`)
+    user = (uid:string) => this.db.ref(`user/${uid}`)
     users = () => this.db.ref('users')
 }
 

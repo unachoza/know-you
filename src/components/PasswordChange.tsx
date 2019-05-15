@@ -4,18 +4,22 @@ import {withFirebase} from './Firebase'
 interface State {
     passwordOne: string, 
     passwordTwo: string,
-    error?: {
-        message?: string
-    }
+    error?: any, 
+   
+}
+interface Props {
+    firebase: {
+        users: any
+    },
 }
 
 const INITIAL_STATE ={
     passwordOne: "",
     passwordTwo: "",
-    error: null
+    error: "null "
 }
 
-class PasswordChangeFrom extends Component<{}, State> {
+class PasswordChangeFrom extends Component<{}, State, Props> {
     constructor(props: any){
         super(props)
 

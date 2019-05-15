@@ -5,12 +5,16 @@ import {withFirebase} from "./Firebase"
 import { Routes } from '../constants/Routes'
 
 const PasswordForgetPage = () => {
-    <div>
-        <h1>PasswordForget</h1>
-        <PasswordForgetForm />
-    </div>
+   return ( 
+        <div>
+            <h1>PasswordForget</h1>
+            <PasswordForgetForm />
+        </div>
+    )
 }
-
+interface Props{
+    firebase: any
+}
 interface State {
     email: string
     firebase?: any,
@@ -67,9 +71,12 @@ class PasswordForgetFormBase extends Component <{},State> {
     }
 }
 const PasswordForgetLink = () => {
-    <p>
-        <Link to={Routes.PASSWORD_FORGET}>Forgot Password?</Link>
-    </p>
+    
+    return (
+        <p>
+            <Link to={Routes.PASSWORD_FORGET}>Forgot Password?</Link>
+        </p>
+    )
 }
 
 export default PasswordForgetPage

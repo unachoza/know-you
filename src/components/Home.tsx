@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {withAuthoriztion} from './Sessions'
+import {withAuthorization} from './Sessions'
 
 const Home = () => {
     <div>
@@ -7,6 +7,6 @@ const Home = () => {
         <p>The Home Page is accesible to every signed in user</p>
     </div>
 }
-const condition = authUser => !!authUser
+const condition = (authUser: {}) => !!authUser
 
-export default withAuthoriztion(condition)(Home)
+export default withAuthorization(condition)(Home)

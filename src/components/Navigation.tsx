@@ -6,17 +6,20 @@ import {AuthUserContext} from './Sessions'
 
 
 const Navigation = () => {
-    <div>
-        <AuthUserContext.Consumer>
-        {authUser => 
-            authUser ? <NavigationAuth/> : <NavigationNonAuth/>
-        }
-        </AuthUserContext.Consumer>
-    </div>
+    return (
+        <div>
+            <AuthUserContext.Consumer>
+                {authUser => 
+                    authUser ? <NavigationAuth/> : <NavigationNonAuth/>
+                }
+            </AuthUserContext.Consumer>
+        </div>
+    )
 }       
 
 export const NavigationAuth = () => {
-                <ul style = {{display: "flex", flexDirection: 'row',listStyleType: "none" }}>
+    return (
+            <ul style = {{display: "flex", flexDirection: 'row',listStyleType: "none" }}>
                 <li style={{ margin: 10}}>
                     <Link to={Routes.SIGN_IN}>Sign In</Link>
                 </li>
@@ -36,23 +39,26 @@ export const NavigationAuth = () => {
                     <SignOutButton />
                 </li>
             </ul>
+            )
     }
 
 const NavigationNonAuth = () => {
-    <ul>
-        <li>
-            <Link to={Routes.LANDING}>Landing</Link>
-        </li>
-        <li>
-            <Link to={Routes.HOME}>Home</Link>
-        </li>
-        <li>
-            <Link to={Routes.SIGN_IN}>Sign in</Link>
-        </li>
-        <li>
-            <Link to={Routes.ADMIN}>Admin</Link>
-        </li>
-    </ul>
+    return (
+        <ul>
+            <li>
+                <Link to={Routes.LANDING}>Landing</Link>
+            </li>
+            <li>
+                <Link to={Routes.HOME}>Home</Link>
+            </li>
+            <li>
+                <Link to={Routes.SIGN_IN}>Sign in</Link>
+            </li>
+            <li>
+                <Link to={Routes.ADMIN}>Admin</Link>
+            </li>
+        </ul>
+    )
 }
     
 

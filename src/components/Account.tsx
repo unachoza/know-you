@@ -3,6 +3,7 @@ import {PasswordForgetForm} from './PasswordForget'
 import PasswordChangeForm from './PasswordChange'
 import {withAuthorization, AuthUserContext} from './Sessions'
 
+
 const AccountPage = () => {
     <AuthUserContext.Consumer>
         {authUser => (
@@ -15,6 +16,6 @@ const AccountPage = () => {
     </AuthUserContext.Consumer>
    
 }
-const condition = authUser => !!authUser
+const condition = (authUser:{}) => !!authUser
 
 export default withAuthorization(condition)(AccountPage)

@@ -3,20 +3,38 @@ import * as Roles from "../constants/Roles"
 import {withAuthorization} from './Sessions'
 import {withFirebase} from './Firebase'
 
+interface State {
+    loading: boolean,
+    users: any,
+    firebase: {
+        users: any
+    }, 
+}
 
-class AdminPage extends Component {
-    constructor(props){
+interface Props {
+    firebase: {
+        users: any
+    }, 
+    users?: any,
+    loading: boolean,
+}
+
+class AdminPage extends Component < State, Props> {
+    constructor(props:any){ 
         super(props)
 
-        this.state= {
-            loading:false, 
-            users: []
+       this.state= {
+            loading: false, 
+            users: [],
+            firebase: {
+                users: ""
+            }
         }
     }   
     componentDidMount(){
         this.setState({loading:true})
 
-        this.props.firebase.users().on('value', snapshot => {
+        this.props.firebase.users().on('value', (snapshot:any) => {
             const usersObject = snapshot.val()
             const usersList = Object.keys(usersObject).map(key => ({
                 ...usersObject[key],
@@ -35,7 +53,7 @@ class AdminPage extends Component {
     }
 
     render(){
-        const { users, laoding } = this.state
+        const { users, loading } = this.state
 
         return(
             <div>
@@ -46,23 +64,26 @@ class AdminPage extends Component {
         )
     }
 }
+declare var users: []
 
-const UserList = ({users}) => {
-    <ul>
-        {users.map(user => {
-            <li key={user.uid}>
-            <span>
-                <strong>ID:</strong> {user.uid}
-            </span>
-            <span>
-                <strong>E-mail:</strong> {user.email}
-            </span>
-            <span>
-                <strong>Username:</strong> {user.username}
-            </span>
-            </li>
-        })}
-    </ul>
+const UserList = ({users: {}}) => {
+    return (
+        <ul>
+            {users.map((user:any) => {
+                <li key={user.uid}>
+                <span>
+                    <strong>ID:</strong> {user.uid}
+                </span>
+                <span>
+                    <strong>E-mail:</strong> {user.email}
+                </span>
+                <span>
+                    <strong>Username:</strong> {user.username}
+                </span>
+                </li>
+            })}
+        </ul>
+    )
 }
 
 export default withFirebase(AdminPage)

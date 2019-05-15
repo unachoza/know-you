@@ -25,7 +25,7 @@ interface Props {
 
 const App = () => {
         <Router history={history}  >
-            <Navigation authUser={this.state.authUser}/>
+            <Navigation match={this.props.match} authUser={this.state.authUser}/>
             <hr />
             <div style= {{textAlign: "center"}}>
             <Route exact path={Routes.LANDING} component={LandingPage} />
